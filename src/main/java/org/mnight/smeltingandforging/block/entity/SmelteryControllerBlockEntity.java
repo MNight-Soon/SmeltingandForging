@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import org.mnight.smeltingandforging.recipe.SmelteryRecipe;
+import org.mnight.smeltingandforging.registry.ModBlockEntities;
 import org.mnight.smeltingandforging.registry.ModRecipes;
 import org.mnight.smeltingandforging.util.HeatHandler;
 
@@ -45,7 +46,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
     private final int[] slotMaxProgress = new int[6];
 
     public  SmelteryControllerBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super();
+        super(ModBlockEntities.SMELTERY_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
