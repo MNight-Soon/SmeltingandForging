@@ -15,10 +15,10 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(Smeltingandforging.MODID)
+@Mod(Smeltingandforging.MOD_ID)
 public class Smeltingandforging {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "smeltingandforging";
+    public static final String MOD_ID = "smeltingandforging";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
