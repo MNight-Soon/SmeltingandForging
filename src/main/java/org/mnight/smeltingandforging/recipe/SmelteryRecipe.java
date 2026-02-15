@@ -1,5 +1,6 @@
 package org.mnight.smeltingandforging.recipe;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
@@ -12,7 +13,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.mnight.smeltingandforging.registry.ModRecipes;
 
-public class SmelteryRecipe implements Recipe<RecipeInput> {
+public class SmelteryRecipe implements Recipe<SingleRecipeInput> {
 
     // กำหนดส่วนประกอบของสูตร: วัตถุดิบ, ผลลัพธ์, อุณหภูมิที่ต้องการ, เวลาที่ใช้
     private final Ingredient input;
@@ -36,13 +37,13 @@ public class SmelteryRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public boolean matches(RecipeInput pInput, Level level) {
+    public boolean matches(SingleRecipeInput pInput, Level level) {
         // เช็คว่าไอเทมในสล็อตตรงกับ Input ของสูตรหรือไม่ (Logic จะถูกเรียกใช้ใน BlockEntity)
         return this.input.test(pInput.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(RecipeInput pInput, HolderLookup.Provider pRegistries){
+    public ItemStack assemble(SingleRecipeInput pInput, HolderLookup.Provider pRegistries){
         return this.output.copy();
     }
 
@@ -77,8 +78,8 @@ public class SmelteryRecipe implements Recipe<RecipeInput> {
         public static final MapCodec<SmelteryRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.input),
                 ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
-                MapCodec.INT.fieldOf("min_temperature").forGetter(r -> r.minTemperature),
-                MapCodec.INT.fieldOf("process_time").forGetter(r -> r.processTime)
+                Codec.INT.fieldOf("min_temperature").forGetter(r -> r.minTemperature),
+                Codec.INT.fieldOf("process_time").forGetter(r -> r.processTime)
         ).apply(inst, SmelteryRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, SmelteryRecipe> STREAM_CODEC = StreamCodec.composite(

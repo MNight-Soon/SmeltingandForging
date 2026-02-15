@@ -5,12 +5,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -126,7 +126,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         }
 
         Optional<SmelteryRecipe> recipe = this.level.getRecipeManager()
-                .getRecipeFor(ModRecipes.SMELTERY_RECIPE_TYPE.get(), new SimpleContainer(inputStack), this.level)
+                .getRecipeFor(ModRecipes.SMELTERY_RECIPE_TYPE.get(), new SingleRecipeInput(inputStack), this.level)
                 .map(r -> (SmelteryRecipe) r.value());
         if (recipe.isPresent()){
             SmelteryRecipe r = recipe.get();
