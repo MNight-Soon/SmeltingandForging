@@ -17,11 +17,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import org.mnight.smeltingandforging.recipe.AlloyRecipe;
+import org.mnight.smeltingandforging.recipe.AlloyRecipeInput;
 import org.mnight.smeltingandforging.recipe.SmelteryRecipe;
 import org.mnight.smeltingandforging.registry.ModBlockEntities;
 import org.mnight.smeltingandforging.registry.ModRecipes;
 import org.mnight.smeltingandforging.util.HeatHandler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class SmelteryControllerBlockEntity extends BlockEntity implements MenuProvider {
@@ -42,8 +46,14 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
     private boolean isFormed = false;
     private int checkStructureTimer = 0;
 
+    private int mode = 0;
+    private int selectedOutput = 0;
+
     private final int[] slotProgress = new int[6];
     private final int[] slotMaxProgress = new int[6];
+
+    private int alloyProgress = 0;
+    private int alloyMaxProgress = 0;
 
     public  SmelteryControllerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SMELTERY_BE.get(), pPos, pBlockState);
@@ -53,6 +63,10 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                 return switch (pIndex){
                     case 0 -> SmelteryControllerBlockEntity.this.heatHandler.getTemperature();
                     case 1 -> SmelteryControllerBlockEntity.this.fuelTime;
+                    case 2 -> SmelteryControllerBlockEntity.this.mode;
+                    case 3 -> SmelteryControllerBlockEntity.this.selectedOutput;
+                    case 4 -> SmelteryControllerBlockEntity.this.alloyProgress;
+                    case 5 -> SmelteryControllerBlockEntity.this.alloyMaxProgress;
                     default -> 0;
                 };
             }
@@ -62,14 +76,28 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                 switch (pIndex) {
                     case 0 -> SmelteryControllerBlockEntity.this.heatHandler.setTemperature(pValue);
                     case 1 -> SmelteryControllerBlockEntity.this.fuelTime = pValue;
+                    case 2 -> SmelteryControllerBlockEntity.this.mode = pValue;
+                    case 3 -> SmelteryControllerBlockEntity.this.selectedOutput = pValue;
+                    case 4 -> SmelteryControllerBlockEntity.this.alloyProgress = pValue;
+                    case 5 -> SmelteryControllerBlockEntity.this.alloyMaxProgress = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 6;
             }
         };
+    }
+
+    public void setMode(int newMode) {
+        this.mode = newMode;
+        setChanged();
+    }
+
+    public void setSelectedOutput(int selection) {
+        this.selectedOutput = selection;
+        setChanged();
     }
 
     @Override
@@ -113,12 +141,20 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
             }
         }
 
-        for (int i = 0; i < 6; i++){
-            pBlockEntity.processSlot(i);
+        if (pBlockEntity.mode == 0) {
+            // Mode 1: Smelting (6 ช่องแยกกัน)
+            for (int i = 0; i < 6; i++) {
+                pBlockEntity.processSmeltingSlot(i);
+            }
+            pBlockEntity.alloyProgress = 0; // Reset progress ของโหมดอื่น
+        } else if (pBlockEntity.mode == 1) {
+            // Mode 2: Alloying (รวม 4 ช่อง -> 1 ช่อง)
+            pBlockEntity.processAlloying();
+            for(int i=0; i<6; i++) pBlockEntity.slotProgress[i] = 0; // Reset progress ของโหมดปกติ
         }
     }
 
-    private void processSlot(int slotIndex){
+    private void processSmeltingSlot(int slotIndex){
         ItemStack inputStack = itemHandler.getStackInSlot(slotIndex);
         if (inputStack.isEmpty()){
             slotProgress[slotIndex] = 0;
@@ -143,7 +179,8 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                     slotMaxProgress[slotIndex] = r.getProcessTime();
 
                     if (slotProgress[slotIndex] >= slotMaxProgress[slotIndex]){
-                        craftItem(slotIndex, r, result);
+                        itemHandler.extractItem(slotIndex, 1, false);
+                        itemHandler.insertItem(slotIndex + 6, result.copy(), false);
                         slotProgress[slotIndex] = 0;
                     }
                 }
@@ -155,9 +192,52 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         }
     }
 
-    private void craftItem(int slotIndex, SmelteryRecipe recipe, ItemStack result){
-        itemHandler.extractItem(slotIndex, 1, false);
-        itemHandler.insertItem(slotIndex + 6, result.copy(), false);
+    private void processAlloying(){
+        List<ItemStack> inputs = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            inputs.add(itemHandler.getStackInSlot(i));
+        }
+
+        AlloyRecipeInput alloyInput = new AlloyRecipeInput(inputs);
+
+        Optional<AlloyRecipe> recipe = this.level.getRecipeManager()
+                .getRecipeFor(ModRecipes.ALLOY_RECIPE_TYPE.get(), alloyInput, this.level)
+                .map(r -> (AlloyRecipe) r.value());
+
+        if (recipe.isPresent()){
+            AlloyRecipe r = recipe.get();
+            if (this.heatHandler.isHotEnough(r.getMinTemperature())){
+                ItemStack result = r.getResultItem(this.level.registryAccess());
+                ItemStack outputSlotStack = itemHandler.getStackInSlot(6);
+
+                boolean canInsert =  outputSlotStack.isEmpty() ||
+                        (outputSlotStack.getItem() == result.getItem() && outputSlotStack.getCount() <= outputSlotStack.getMaxStackSize());
+
+                if (canInsert){
+                    this.alloyProgress++;
+                    this.alloyMaxProgress = r.getProcessTime();
+
+                    if (this.alloyProgress >= this.alloyMaxProgress){
+                        craftAlloy(r, result);
+                        this.alloyProgress = 0;
+                    }
+                }
+            } else {
+                if (this.alloyProgress > 0) this.alloyProgress--;
+            }
+        } else {
+            this.alloyProgress = 0;
+        }
+    }
+
+    private void craftAlloy(AlloyRecipe recipe, ItemStack result){
+        itemHandler.insertItem(6, result.copy(), false);
+
+        for (int i = 0; i < 4; i++){
+            if(!itemHandler.getStackInSlot(i).isEmpty()){
+                itemHandler.extractItem(i,1,false);
+            }
+        }
     }
 
     private boolean checkStructure() {
@@ -168,23 +248,27 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
         pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        //Save HeatHandler
         pTag.put("heat", heatHandler.serializeNBT(pRegistries));
         pTag.putIntArray("slotProgress", slotProgress);
+        pTag.putInt("mode", mode);
+        pTag.putInt("selectedOutput", selectedOutput);
+        pTag.putInt("alloyProgress", alloyProgress);
     }
 
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        // Load HeatHandler
         if (pTag.contains("heat")) {
             heatHandler.deserializeNBT(pRegistries, pTag.getCompound("heat"));
         }
         int[] loadedProgress = pTag.getIntArray("slotProgress");
-        if (loadedProgress.length == 6){
+        if (loadedProgress.length == 6) {
             System.arraycopy(loadedProgress, 0, slotProgress, 0, 6);
         }
+        mode = pTag.getInt("mode");
+        selectedOutput = pTag.getInt("selectedOutput");
+        alloyProgress = pTag.getInt("alloyProgress");
     }
 
 }
