@@ -7,6 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.mnight.smeltingandforging.Smeltingandforging;
+import org.mnight.smeltingandforging.block.SmelteryControllerBlock;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Smeltingandforging.MOD_ID);
