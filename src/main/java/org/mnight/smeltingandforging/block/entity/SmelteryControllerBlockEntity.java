@@ -2,14 +2,20 @@ package org.mnight.smeltingandforging.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
@@ -41,7 +47,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
 
     protected final ContainerData data;
     private int fuelTime = 0;
-    private int maxFualTime = 0;
+    private int maxFuelTime = 0;
 
     private boolean isFormed = false;
     private int checkStructureTimer = 0;
@@ -67,6 +73,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                     case 3 -> SmelteryControllerBlockEntity.this.selectedOutput;
                     case 4 -> SmelteryControllerBlockEntity.this.alloyProgress;
                     case 5 -> SmelteryControllerBlockEntity.this.alloyMaxProgress;
+                    case 6 -> SmelteryControllerBlockEntity.this.maxFuelTime;
                     default -> 0;
                 };
             }
@@ -80,12 +87,13 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                     case 3 -> SmelteryControllerBlockEntity.this.selectedOutput = pValue;
                     case 4 -> SmelteryControllerBlockEntity.this.alloyProgress = pValue;
                     case 5 -> SmelteryControllerBlockEntity.this.alloyMaxProgress = pValue;
+                    case 6 -> SmelteryControllerBlockEntity.this.maxFuelTime = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 6;
+                return 7;
             }
         };
     }
@@ -100,6 +108,10 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         setChanged();
     }
 
+    public ItemStackHandler getItemHandler() {
+        return itemHandler;
+    }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.smeltingandforging.smeltery_controller");
@@ -111,7 +123,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         return null;
     }
 
-    public static void ticks(Level pLevel, BlockPos pPos, BlockState pBlockState, SmelteryControllerBlockEntity pBlockEntity) {
+    public static void ticks(Level pLevel, BlockPos pPos, BlockState pState, SmelteryControllerBlockEntity pBlockEntity) {
         if (pLevel.isClientSide()) return;
 
         if (pBlockEntity.checkStructureTimer++ >= 20) {
@@ -133,8 +145,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                 int burntime = AbstractFurnaceBlockEntity.getFuel().getOrDefault(fuelStack.getItem(), 0);
                 if (burntime > 0) {
                     pBlockEntity.fuelTime = burntime;
-                    pBlockEntity.maxFualTime = burntime;
+                    pBlockEntity.maxFuelTime = burntime;
                     pBlockEntity.itemHandler.extractItem(12,1,false);
+                    setChanged(pLevel,pPos, pState);
                 }
             } else {
                 pBlockEntity.heatHandler.coolDown(1);
@@ -182,6 +195,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                         itemHandler.extractItem(slotIndex, 1, false);
                         itemHandler.insertItem(slotIndex + 6, result.copy(), false);
                         slotProgress[slotIndex] = 0;
+                        setChanged();
                     }
                 }
             } else {
@@ -218,8 +232,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
                     this.alloyMaxProgress = r.getProcessTime();
 
                     if (this.alloyProgress >= this.alloyMaxProgress){
-                        craftAlloy(r, result);
+                        craftAlloy(r, result, inputs);
                         this.alloyProgress = 0;
+                        setChanged();
                     }
                 }
             } else {
@@ -230,14 +245,32 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         }
     }
 
-    private void craftAlloy(AlloyRecipe recipe, ItemStack result){
-        itemHandler.insertItem(6, result.copy(), false);
-
-        for (int i = 0; i < 4; i++){
-            if(!itemHandler.getStackInSlot(i).isEmpty()){
-                itemHandler.extractItem(i,1,false);
+    private void craftAlloy(AlloyRecipe recipe, ItemStack result, List<ItemStack> inputs){
+        ItemStack outputItem = result.copy();
+        saveCompositionData(outputItem, inputs);
+        itemHandler.insertItem(6, outputItem, false);
+        for(int i=0; i<4; i++) {
+            if(!itemHandler.getStackInSlot(i).isEmpty()) {
+                itemHandler.extractItem(i, 1, false);
             }
         }
+    }
+
+    private void saveCompositionData(ItemStack output, List<ItemStack> inputs){
+        CustomData customData = output.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+        ListTag compositionList = new ListTag();
+
+        for(ItemStack stack : inputs){
+            if (!stack.isEmpty()) {
+                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                compositionList.add(StringTag.valueOf(itemId.toString()));
+            }
+        }
+
+        tag.put("Composition", compositionList);
+        tag.putInt("PatternID", this.selectedOutput);
+        output.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
 
     private boolean checkStructure() {
@@ -256,7 +289,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
     }
 
     @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+    public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
         if (pTag.contains("heat")) {
@@ -269,6 +302,8 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         mode = pTag.getInt("mode");
         selectedOutput = pTag.getInt("selectedOutput");
         alloyProgress = pTag.getInt("alloyProgress");
+        fuelTime = pTag.getInt("fuelTime");
+        maxFuelTime = pTag.getInt("maxFuelTime");
     }
 
 }
