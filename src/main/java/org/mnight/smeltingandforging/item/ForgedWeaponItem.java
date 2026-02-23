@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ForgedWeaponItem extends Item {
     public ForgedWeaponItem(Properties properties) {
-        super(properties.component(ModDataComponents.WEAPON_STATS.get(), WeaponStats.DEFAULT));
+        super(properties);
     }
 
     public static void applyStatsToStack(ItemStack stack, WeaponStats stats) {

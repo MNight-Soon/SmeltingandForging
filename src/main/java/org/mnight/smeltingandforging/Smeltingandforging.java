@@ -2,6 +2,8 @@ package org.mnight.smeltingandforging;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,10 +14,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.mnight.smeltingandforging.registry.ModBlockEntities;
-import org.mnight.smeltingandforging.registry.ModBlocks;
-import org.mnight.smeltingandforging.registry.ModItems;
-import org.mnight.smeltingandforging.registry.ModRecipes;
+import org.mnight.smeltingandforging.item.ForgedWeaponItem;
+import org.mnight.smeltingandforging.item.component.WeaponStats;
+import org.mnight.smeltingandforging.registry.*;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -37,6 +38,7 @@ public class Smeltingandforging {
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModDataComponents.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in.
@@ -58,7 +60,15 @@ public class Smeltingandforging {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModItems.SMELTERY_CONTROLLER_ITEM.get());
+        }
 
+        if (event.getTabKey() == CreativeModeTabs.COMBAT){
+            ItemStack customSword = new ItemStack(ModItems.FORGED_SWORD.get());
+            ForgedWeaponItem.applyStatsToStack(customSword, WeaponStats.DEFAULT);
+            event.accept(customSword);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
