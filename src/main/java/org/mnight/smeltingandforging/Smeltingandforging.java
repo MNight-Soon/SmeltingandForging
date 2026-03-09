@@ -1,21 +1,24 @@
 package org.mnight.smeltingandforging;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.mnight.smeltingandforging.gui.SmelteryScreen;
 import org.mnight.smeltingandforging.item.ForgedWeaponItem;
 import org.mnight.smeltingandforging.item.component.WeaponStats;
+import org.mnight.smeltingandforging.network.SmelteryActionPayload;
 import org.mnight.smeltingandforging.registry.*;
 import org.slf4j.Logger;
 
@@ -33,12 +36,14 @@ public class Smeltingandforging {
     public Smeltingandforging(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerNetwork);
 
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModMenu.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in.
@@ -51,6 +56,11 @@ public class Smeltingandforging {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    private void registerNetwork(final RegisterPayloadHandlersEvent event){
+        final PayloadRegistrar registrar = event.registrar(MOD_ID);
+        registrar.playToServer(SmelteryActionPayload.TYPE, SmelteryActionPayload.STREAM_CODEC, SmelteryActionPayload::handle);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -78,7 +88,12 @@ public class Smeltingandforging {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+
     public static class ClientModEvents {
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenu.SMELTER_MENU.get(), SmelteryScreen::new);
+        }
 
     }
 }

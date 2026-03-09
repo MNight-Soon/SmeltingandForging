@@ -49,10 +49,9 @@ public class SmelteryControllerBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult){
-        if (!pLevel.isClientSide()){
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof SmelteryControllerBlockEntity){
-                System.out.println("Opened Smeltery GUI (Placeholder)");
+        if (!pLevel.isClientSide()) {
+            if (pLevel.getBlockEntity(pPos) instanceof SmelteryControllerBlockEntity blockEntity) {
+                pPlayer.openMenu(blockEntity, pPos);
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());

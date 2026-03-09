@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import org.mnight.smeltingandforging.inventory.SmelteryMenu;
 import org.mnight.smeltingandforging.recipe.AlloyRecipe;
 import org.mnight.smeltingandforging.recipe.AlloyRecipeInput;
 import org.mnight.smeltingandforging.recipe.SmelteryRecipe;
@@ -66,6 +67,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
+                if (pIndex >= 7 && pIndex < 13) return SmelteryControllerBlockEntity.this.slotProgress[pIndex - 7];
+                if (pIndex >= 13 && pIndex < 19) return SmelteryControllerBlockEntity.this.slotMaxProgress[pIndex - 13];
+
                 return switch (pIndex){
                     case 0 -> SmelteryControllerBlockEntity.this.heatHandler.getTemperature();
                     case 1 -> SmelteryControllerBlockEntity.this.fuelTime;
@@ -80,6 +84,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
 
             @Override
             public void set(int pIndex, int pValue) {
+                if (pIndex >= 7 && pIndex < 13) { SmelteryControllerBlockEntity.this.slotProgress[pIndex - 7] = pValue; return; }
+                if (pIndex >= 13 && pIndex < 19) { SmelteryControllerBlockEntity.this.slotMaxProgress[pIndex - 13] = pValue; return; }
+
                 switch (pIndex) {
                     case 0 -> SmelteryControllerBlockEntity.this.heatHandler.setTemperature(pValue);
                     case 1 -> SmelteryControllerBlockEntity.this.fuelTime = pValue;
@@ -93,7 +100,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
 
             @Override
             public int getCount() {
-                return 7;
+                return 19;
             }
         };
     }
@@ -120,7 +127,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity implements MenuPr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player player){
-        return null;
+        return new SmelteryMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     public static void ticks(Level pLevel, BlockPos pPos, BlockState pState, SmelteryControllerBlockEntity pBlockEntity) {
