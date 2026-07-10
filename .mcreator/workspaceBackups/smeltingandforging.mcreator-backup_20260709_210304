@@ -1,0 +1,61 @@
+{
+  "mod_elements": [
+    {
+      "name": "Forger",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "forger",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/smeltingandforging/models/item/forger.json",
+          "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
+          "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
+          "src/main/resources/assets/smeltingandforging/blockstates/forger.json",
+          "src/main/resources/data/smeltingandforging/loot_table/blocks/forger.json",
+          "src/main/resources/assets/smeltingandforging/models/block/forger.json"
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "tag_elements": {},
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "block.smeltingandforging.forger": "Forger"
+    }
+  },
+  "metadata": {
+    "files": [
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlocks.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlockEntities.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModItems.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModTabs.java",
+      "src/main/java/net/mcreator/smeltingandforging/SmeltingandforgingMod.java",
+      "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/resources/pack.mcmeta"
+    ]
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "smeltingandforging",
+    "modName": "Smeltingandforging",
+    "version": "1.0.0",
+    "author": "MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Not specified",
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "neoforge-1.21.1",
+    "modElementsPackage": "net.mcreator.smeltingandforging"
+  },
+  "mcreatorVersion": 202600227711
+}
