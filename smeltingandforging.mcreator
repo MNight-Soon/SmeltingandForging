@@ -39,7 +39,8 @@
     "en_us": {
       "block.smeltingandforging.forger": "Forger",
       "gui.smeltingandforging.forger_gui.button_smith": "Smith",
-      "gui.smeltingandforging.forger_gui.button_forge": "Forge"
+      "gui.smeltingandforging.forger_gui.button_forge": "Forge",
+      "gui.smeltingandforging.forger_gui.label_forger": "Forger"
     }
   },
   "metadata": {

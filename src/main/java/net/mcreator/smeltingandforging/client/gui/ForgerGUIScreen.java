@@ -20,7 +20,6 @@ public class ForgerGUIScreen extends AbstractContainerScreen<ForgerGUIMenu> impl
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
 	private Button button_forge;
-	private Button button_smith;
 	private static final ResourceLocation BACKGROUND = ResourceLocation.parse("smeltingandforging:textures/screens/forger_gui.png");
 
 	public ForgerGUIScreen(ForgerGUIMenu container, Inventory inventory, Component text) {
@@ -66,16 +65,14 @@ public class ForgerGUIScreen extends AbstractContainerScreen<ForgerGUIMenu> impl
 
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+		guiGraphics.drawString(this.font, Component.translatable("gui.smeltingandforging.forger_gui.label_forger"), 136, 7, -12829636, false);
 	}
 
 	@Override
 	public void init() {
 		super.init();
 		button_forge = Button.builder(Component.translatable("gui.smeltingandforging.forger_gui.button_forge"), e -> {
-		}).bounds(this.leftPos + 0, this.topPos + -18, 50, 20).build();
+		}).bounds(this.leftPos + 118, this.topPos + 59, 50, 20).build();
 		this.addRenderableWidget(button_forge);
-		button_smith = Button.builder(Component.translatable("gui.smeltingandforging.forger_gui.button_smith"), e -> {
-		}).bounds(this.leftPos + 50, this.topPos + -18, 50, 20).build();
-		this.addRenderableWidget(button_smith);
 	}
 }
