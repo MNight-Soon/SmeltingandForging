@@ -32,6 +32,12 @@ authors="MCreator"
     side="BOTH"
 
 
+[[dependencies.smeltingandforging]]
+    modId="jei"
+    type="optional"
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
 
 
 # Start of user code block dependencies configuration

@@ -70,15 +70,15 @@
       }
     },
     {
-      "name": "ForgerCraftingLogic",
+      "name": "Forgerforheader",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "forger_crafting_logic",
+      "registry_name": "forgerforheader",
       "metadata": {
         "dependencies": [],
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/procedures/ForgerCraftingLogicProcedure.java"
+          "src/main/java/net/mcreator/smeltingandforging/procedures/ForgerforheaderProcedure.java"
         ]
       }
     }
@@ -131,8 +131,11 @@
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],
-    "mcreatorDependencies": [],
+    "mcreatorDependencies": [
+      "jei"
+    ],
     "currentGenerator": "neoforge-1.21.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.smeltingandforging"
   },
   "mcreatorVersion": 202600227711
