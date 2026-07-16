@@ -45,15 +45,15 @@
   },
   "metadata": {
     "files": [
-      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModScreens.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModMenus.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModScreens.java",
       "src/main/java/net/mcreator/smeltingandforging/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlocks.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlockEntities.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModItems.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModTabs.java",
-      "src/main/java/net/mcreator/smeltingandforging/SmeltingandforgingMod.java",
       "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/java/net/mcreator/smeltingandforging/SmeltingandforgingMod.java",
       "src/main/resources/pack.mcmeta"
     ]
   },
