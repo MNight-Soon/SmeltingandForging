@@ -8,10 +8,10 @@
       "registry_name": "forger",
       "metadata": {
         "files": [
-          "src/main/resources/assets/smeltingandforging/models/item/forger.json",
-          "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
           "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
+          "src/main/resources/assets/smeltingandforging/models/item/forger.json",
           "src/main/resources/assets/smeltingandforging/blockstates/forger.json",
+          "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
           "src/main/resources/data/smeltingandforging/loot_table/blocks/forger.json",
           "src/main/resources/assets/smeltingandforging/models/block/forger.json"
         ]
@@ -29,18 +29,77 @@
           "src/main/java/net/mcreator/smeltingandforging/world/inventory/ForgerGUIMenu.java"
         ]
       }
+    },
+    {
+      "name": "Headblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "headblueprint",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/smeltingandforging/models/item/headblueprint.json",
+          "src/main/java/net/mcreator/smeltingandforging/item/HeadblueprintItem.java"
+        ]
+      }
+    },
+    {
+      "name": "Coreblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "coreblueprint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/item/CoreblueprintItem.java",
+          "src/main/resources/assets/smeltingandforging/models/item/coreblueprint.json"
+        ]
+      }
+    },
+    {
+      "name": "Rodeblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rodeblueprint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/item/RodeblueprintItem.java",
+          "src/main/resources/assets/smeltingandforging/models/item/rodeblueprint.json"
+        ]
+      }
+    },
+    {
+      "name": "ForgerCraftingLogic",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "forger_crafting_logic",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/procedures/ForgerCraftingLogicProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
-  "tag_elements": {},
+  "tag_elements": {
+    "ITEMS:minecraft:main_material": [
+      "TAG:forge:ores/iron"
+    ]
+  },
   "tab_element_order": {},
   "language_map": {
     "en_us": {
       "block.smeltingandforging.forger": "Forger",
       "gui.smeltingandforging.forger_gui.button_smith": "Smith",
       "gui.smeltingandforging.forger_gui.button_forge": "Forge",
-      "gui.smeltingandforging.forger_gui.label_forger": "Forger"
+      "gui.smeltingandforging.forger_gui.label_forger": "Forger",
+      "item.smeltingandforging.headblueprint": "Headblueprint",
+      "item.smeltingandforging.coreblueprint": "Headblueprint",
+      "item.smeltingandforging.rodeblueprint": "Headblueprint"
     }
   },
   "metadata": {

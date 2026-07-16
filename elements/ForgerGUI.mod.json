@@ -23,7 +23,7 @@
           },
           "dropItemsWhenNotBound": true,
           "x": 271,
-          "y": 68,
+          "y": 69,
           "locked": false
         }
       },
@@ -69,7 +69,7 @@
           },
           "dropItemsWhenNotBound": true,
           "x": 136,
-          "y": 82,
+          "y": 70,
           "locked": false
         }
       },
@@ -176,6 +176,25 @@
           "hasShadow": false,
           "x": 262,
           "y": 44,
+          "locked": false
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "disablePlacement": {
+            "fixedValue": false
+          },
+          "id": 7,
+          "disablePickup": {
+            "fixedValue": false
+          },
+          "dropItemsWhenNotBound": true,
+          "x": 136,
+          "y": 97,
           "locked": false
         }
       }

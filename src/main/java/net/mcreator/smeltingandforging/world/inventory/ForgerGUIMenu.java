@@ -32,7 +32,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override
 		public Object put(String key, Object value) {
-			if (!this.containsKey(key) && this.size() >= 9)
+			if (!this.containsKey(key) && this.size() >= 10)
 				return null;
 			return super.put(key, value);
 		}
@@ -52,7 +52,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 		super(SmeltingandforgingModMenus.FORGER_GUI.get(), id);
 		this.entity = inv.player;
 		this.world = inv.player.level();
-		this.internal = new ItemStackHandler(7);
+		this.internal = new ItemStackHandler(8);
 		BlockPos pos = null;
 		if (extraData != null) {
 			pos = extraData.readBlockPos();
@@ -89,7 +89,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 				}
 			}
 		}
-		this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 146, 32) {
+		this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 146, 33) {
 			private final int slot = 0;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
@@ -104,7 +104,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
 		}));
-		this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 11, 46) {
+		this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 11, 34) {
 			private final int slot = 2;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
@@ -126,6 +126,11 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 		}));
 		this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 81, 47) {
 			private final int slot = 6;
+			private int x = ForgerGUIMenu.this.x;
+			private int y = ForgerGUIMenu.this.y;
+		}));
+		this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 11, 61) {
+			private final int slot = 7;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
 		}));
@@ -156,16 +161,16 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
-			if (index < 7) {
-				if (!this.moveItemStackTo(itemstack1, 7, this.slots.size(), true))
+			if (index < 8) {
+				if (!this.moveItemStackTo(itemstack1, 8, this.slots.size(), true))
 					return ItemStack.EMPTY;
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (!this.moveItemStackTo(itemstack1, 0, 7, false)) {
-				if (index < 7 + 27) {
-					if (!this.moveItemStackTo(itemstack1, 7 + 27, this.slots.size(), true))
+			} else if (!this.moveItemStackTo(itemstack1, 0, 8, false)) {
+				if (index < 8 + 27) {
+					if (!this.moveItemStackTo(itemstack1, 8 + 27, this.slots.size(), true))
 						return ItemStack.EMPTY;
 				} else {
-					if (!this.moveItemStackTo(itemstack1, 7, 7 + 27, false))
+					if (!this.moveItemStackTo(itemstack1, 8, 8 + 27, false))
 						return ItemStack.EMPTY;
 				}
 				return ItemStack.EMPTY;

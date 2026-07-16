@@ -107,7 +107,7 @@
     },
     "hasInventory": true,
     "guiBoundTo": "ForgerGUI",
-    "openGUIOnRightClick": false,
+    "openGUIOnRightClick": true,
     "inventorySize": 9,
     "inventoryStackSize": 99,
     "inventoryDropWhenDestroyed": true,

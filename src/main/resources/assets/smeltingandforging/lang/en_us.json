@@ -2,5 +2,8 @@
   "block.smeltingandforging.forger": "Forger",
   "gui.smeltingandforging.forger_gui.button_smith": "Smith",
   "gui.smeltingandforging.forger_gui.button_forge": "Forge",
-  "gui.smeltingandforging.forger_gui.label_forger": "Forger"
+  "gui.smeltingandforging.forger_gui.label_forger": "Forger",
+  "item.smeltingandforging.headblueprint": "Headblueprint",
+  "item.smeltingandforging.coreblueprint": "Headblueprint",
+  "item.smeltingandforging.rodeblueprint": "Headblueprint"
 }
