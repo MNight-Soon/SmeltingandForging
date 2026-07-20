@@ -1,6 +1,6 @@
 package net.mcreator.smeltingandforging.procedures;
 
-public class ForgerforheaderProcedure {
+public class ButtonforgerProcedure {
 	public static void execute() {
 	}
 }

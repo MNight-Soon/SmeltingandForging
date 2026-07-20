@@ -12,21 +12,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
 
 import net.mcreator.smeltingandforging.item.RodeblueprintItem;
-import net.mcreator.smeltingandforging.item.HeadblueprintItem;
+import net.mcreator.smeltingandforging.item.PickaxeheadblueprintItem;
 import net.mcreator.smeltingandforging.item.CoreblueprintItem;
 import net.mcreator.smeltingandforging.SmeltingandforgingMod;
 
 public class SmeltingandforgingModItems {
 	public static final DeferredRegister.Items REGISTRY = DeferredRegister.createItems(SmeltingandforgingMod.MODID);
 	public static final DeferredItem<Item> FORGER;
-	public static final DeferredItem<Item> HEADBLUEPRINT;
 	public static final DeferredItem<Item> COREBLUEPRINT;
 	public static final DeferredItem<Item> RODEBLUEPRINT;
+	public static final DeferredItem<Item> PICKAXEHEADBLUEPRINT;
 	static {
 		FORGER = block(SmeltingandforgingModBlocks.FORGER);
-		HEADBLUEPRINT = REGISTRY.register("headblueprint", HeadblueprintItem::new);
 		COREBLUEPRINT = REGISTRY.register("coreblueprint", CoreblueprintItem::new);
 		RODEBLUEPRINT = REGISTRY.register("rodeblueprint", RodeblueprintItem::new);
+		PICKAXEHEADBLUEPRINT = REGISTRY.register("pickaxeheadblueprint", PickaxeheadblueprintItem::new);
 	}
 
 	// Start of user code block custom items

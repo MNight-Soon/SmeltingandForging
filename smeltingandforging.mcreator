@@ -8,10 +8,10 @@
       "registry_name": "forger",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
           "src/main/resources/assets/smeltingandforging/models/item/forger.json",
-          "src/main/resources/assets/smeltingandforging/blockstates/forger.json",
           "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
+          "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
+          "src/main/resources/assets/smeltingandforging/blockstates/forger.json",
           "src/main/resources/data/smeltingandforging/loot_table/blocks/forger.json",
           "src/main/resources/assets/smeltingandforging/models/block/forger.json"
         ]
@@ -31,19 +31,6 @@
       }
     },
     {
-      "name": "Headblueprint",
-      "type": "item",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "headblueprint",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/smeltingandforging/models/item/headblueprint.json",
-          "src/main/java/net/mcreator/smeltingandforging/item/HeadblueprintItem.java"
-        ]
-      }
-    },
-    {
       "name": "Coreblueprint",
       "type": "item",
       "compiles": true,
@@ -51,8 +38,8 @@
       "registry_name": "coreblueprint",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/item/CoreblueprintItem.java",
-          "src/main/resources/assets/smeltingandforging/models/item/coreblueprint.json"
+          "src/main/resources/assets/smeltingandforging/models/item/coreblueprint.json",
+          "src/main/java/net/mcreator/smeltingandforging/item/CoreblueprintItem.java"
         ]
       }
     },
@@ -70,26 +57,35 @@
       }
     },
     {
-      "name": "Forgerforheader",
+      "name": "Pickaxeheadblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "pickaxeheadblueprint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/item/PickaxeheadblueprintItem.java",
+          "src/main/resources/assets/smeltingandforging/models/item/pickaxeheadblueprint.json"
+        ]
+      }
+    },
+    {
+      "name": "Buttonforger",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "forgerforheader",
+      "registry_name": "buttonforger",
       "metadata": {
         "dependencies": [],
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/procedures/ForgerforheaderProcedure.java"
+          "src/main/java/net/mcreator/smeltingandforging/procedures/ButtonforgerProcedure.java"
         ]
       }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
-  "tag_elements": {
-    "ITEMS:minecraft:main_material": [
-      "TAG:forge:ores/iron"
-    ]
-  },
+  "tag_elements": {},
   "tab_element_order": {},
   "language_map": {
     "en_us": {
@@ -97,9 +93,9 @@
       "gui.smeltingandforging.forger_gui.button_smith": "Smith",
       "gui.smeltingandforging.forger_gui.button_forge": "Forge",
       "gui.smeltingandforging.forger_gui.label_forger": "Forger",
-      "item.smeltingandforging.headblueprint": "Headblueprint",
       "item.smeltingandforging.coreblueprint": "Headblueprint",
-      "item.smeltingandforging.rodeblueprint": "Headblueprint"
+      "item.smeltingandforging.rodeblueprint": "Headblueprint",
+      "item.smeltingandforging.pickaxeheadblueprint": "Pickaxeheadblueprint"
     }
   },
   "metadata": {
@@ -138,5 +134,5 @@
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.smeltingandforging"
   },
-  "mcreatorVersion": 202600227711
+  "mcreatorVersion": 202600229418
 }

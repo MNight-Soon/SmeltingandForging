@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "id": "#forge:ores/iron",
-      "required": false
-    }
-  ]
-}
