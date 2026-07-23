@@ -81,6 +81,18 @@
           "src/main/java/net/mcreator/smeltingandforging/procedures/ButtonforgerProcedure.java"
         ]
       }
+    },
+    {
+      "name": "ServantZombieEntity",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "servant_zombie_entity",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/ServantZombieEntity.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -114,7 +126,12 @@
   },
   "foldersRoot": {
     "name": "~",
-    "children": []
+    "children": [
+      {
+        "name": "Skill",
+        "children": []
+      }
+    ]
   },
   "workspaceSettings": {
     "modid": "smeltingandforging",
