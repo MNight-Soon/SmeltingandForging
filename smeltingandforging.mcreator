@@ -68,31 +68,6 @@
           "src/main/resources/assets/smeltingandforging/models/item/pickaxeheadblueprint.json"
         ]
       }
-    },
-    {
-      "name": "Buttonforger",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "buttonforger",
-      "metadata": {
-        "dependencies": [],
-        "files": [
-          "src/main/java/net/mcreator/smeltingandforging/procedures/ButtonforgerProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "ServantZombieEntity",
-      "type": "code",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "servant_zombie_entity",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/smeltingandforging/ServantZombieEntity.java"
-        ]
-      }
     }
   ],
   "variable_elements": [],
