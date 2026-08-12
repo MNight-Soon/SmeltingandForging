@@ -83,6 +83,20 @@
         ]
       },
       "path": "~/GUI"
+    },
+    {
+      "name": "ForgerGUIMiniGame",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "forger_gui_mini_game",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/world/inventory/ForgerGUIMiniGameMenu.java",
+          "src/main/java/net/mcreator/smeltingandforging/client/gui/ForgerGUIMiniGameScreen.java"
+        ]
+      },
+      "path": "~/GUI"
     }
   ],
   "variable_elements": [],
@@ -96,7 +110,8 @@
       "item.smeltingandforging.coreblueprint": "Headblueprint",
       "item.smeltingandforging.rodeblueprint": "Headblueprint",
       "item.smeltingandforging.pickaxeheadblueprint": "Pickaxeheadblueprint",
-      "gui.smeltingandforging.forger_gui.button_start": "Start"
+      "gui.smeltingandforging.forger_gui.button_start": "Start",
+      "gui.smeltingandforging.forger_gui_mini_game.button_start": "Start"
     }
   },
   "metadata": {

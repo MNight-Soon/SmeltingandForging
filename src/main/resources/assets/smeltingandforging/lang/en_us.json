@@ -3,5 +3,6 @@
   "gui.smeltingandforging.forger_gui.button_smith": "Smith",
   "item.smeltingandforging.coreblueprint": "Headblueprint",
   "item.smeltingandforging.rodeblueprint": "Headblueprint",
-  "item.smeltingandforging.pickaxeheadblueprint": "Pickaxeheadblueprint"
+  "item.smeltingandforging.pickaxeheadblueprint": "Pickaxeheadblueprint",
+  "gui.smeltingandforging.forger_gui.button_start": "Start"
 }
