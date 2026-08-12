@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.client.Minecraft;
 
+import net.mcreator.smeltingandforging.world.inventory.SmithingTableGUIMenu;
 import net.mcreator.smeltingandforging.world.inventory.ForgerGUIMenu;
 import net.mcreator.smeltingandforging.network.MenuStateUpdateMessage;
 import net.mcreator.smeltingandforging.SmeltingandforgingMod;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 public class SmeltingandforgingModMenus {
 	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(Registries.MENU, SmeltingandforgingMod.MODID);
+	public static final DeferredHolder<MenuType<?>, MenuType<SmithingTableGUIMenu>> SMITHING_TABLE_GUI = REGISTRY.register("smithing_table_gui", () -> IMenuTypeExtension.create(SmithingTableGUIMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<ForgerGUIMenu>> FORGER_GUI = REGISTRY.register("forger_gui", () -> IMenuTypeExtension.create(ForgerGUIMenu::new));
 
 	public interface MenuAccessor {

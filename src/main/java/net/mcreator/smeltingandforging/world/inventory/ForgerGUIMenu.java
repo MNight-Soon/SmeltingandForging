@@ -32,7 +32,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override
 		public Object put(String key, Object value) {
-			if (!this.containsKey(key) && this.size() >= 10)
+			if (!this.containsKey(key) && this.size() >= 7)
 				return null;
 			return super.put(key, value);
 		}
@@ -52,7 +52,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 		super(SmeltingandforgingModMenus.FORGER_GUI.get(), id);
 		this.entity = inv.player;
 		this.world = inv.player.level();
-		this.internal = new ItemStackHandler(8);
+		this.internal = new ItemStackHandler(6);
 		BlockPos pos = null;
 		if (extraData != null) {
 			pos = extraData.readBlockPos();
@@ -62,7 +62,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 			access = ContainerLevelAccess.create(world, pos);
 		}
 		if (pos != null) {
-			if (extraData.readableBytes() == 1) { // bound to item
+			if (extraData.readableBytes() == 1) {
 				byte hand = extraData.readByte();
 				ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
 				this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -71,8 +71,8 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 					this.internal = cap;
 					this.bound = true;
 				}
-			} else if (extraData.readableBytes() > 1) { // bound to entity
-				extraData.readByte(); // drop padding
+			} else if (extraData.readableBytes() > 1) {
+				extraData.readByte();
 				boundEntity = world.getEntity(extraData.readVarInt());
 				if (boundEntity != null) {
 					IItemHandler cap = boundEntity.getCapability(Capabilities.ItemHandler.ENTITY);
@@ -81,7 +81,7 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 						this.bound = true;
 					}
 				}
-			} else { // might be bound to block
+			} else {
 				boundBlockEntity = this.world.getBlockEntity(pos);
 				if (boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
 					this.internal = new InvWrapper(baseContainerBlockEntity);
@@ -89,56 +89,71 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 				}
 			}
 		}
-		this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 146, 33) {
+		this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 85, 44) {
 			private final int slot = 0;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
 
 			@Override
-			public boolean mayPlace(ItemStack stack) {
+			public boolean mayPlace(ItemStack itemstack) {
 				return false;
 			}
 		}));
-		this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 11, 9) {
+		this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 111, 44) {
 			private final int slot = 1;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
+
+			@Override
+			public boolean mayPlace(ItemStack itemstack) {
+				return false;
+			}
 		}));
-		this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 11, 34) {
+		this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 85, 69) {
 			private final int slot = 2;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
+
+			@Override
+			public boolean mayPlace(ItemStack itemstack) {
+				return false;
+			}
 		}));
-		this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 63, 29) {
+		this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 59, 43) {
 			private final int slot = 3;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
+
+			@Override
+			public boolean mayPlace(ItemStack itemstack) {
+				return false;
+			}
 		}));
-		this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 81, 29) {
+		this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 85, 18) {
 			private final int slot = 4;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
+
+			@Override
+			public boolean mayPlace(ItemStack itemstack) {
+				return false;
+			}
 		}));
-		this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 63, 47) {
+		this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 17, 12) {
 			private final int slot = 5;
 			private int x = ForgerGUIMenu.this.x;
 			private int y = ForgerGUIMenu.this.y;
-		}));
-		this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 81, 47) {
-			private final int slot = 6;
-			private int x = ForgerGUIMenu.this.x;
-			private int y = ForgerGUIMenu.this.y;
-		}));
-		this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 11, 61) {
-			private final int slot = 7;
-			private int x = ForgerGUIMenu.this.x;
-			private int y = ForgerGUIMenu.this.y;
+
+			@Override
+			public boolean mayPlace(ItemStack itemstack) {
+				return false;
+			}
 		}));
 		for (int si = 0; si < 3; ++si)
 			for (int sj = 0; sj < 9; ++sj)
-				this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 0 + 84 + si * 18));
+				this.addSlot(new Slot(inv, sj + (si + 1) * 9, 2 + 8 + sj * 18, 14 + 84 + si * 18));
 		for (int si = 0; si < 9; ++si)
-			this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 0 + 142));
+			this.addSlot(new Slot(inv, si, 2 + 8 + si * 18, 14 + 142));
 	}
 
 	@Override
@@ -161,16 +176,16 @@ public class ForgerGUIMenu extends AbstractContainerMenu implements Smeltingandf
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
-			if (index < 8) {
-				if (!this.moveItemStackTo(itemstack1, 8, this.slots.size(), true))
+			if (index < 6) {
+				if (!this.moveItemStackTo(itemstack1, 6, this.slots.size(), true))
 					return ItemStack.EMPTY;
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (!this.moveItemStackTo(itemstack1, 0, 8, false)) {
-				if (index < 8 + 27) {
-					if (!this.moveItemStackTo(itemstack1, 8 + 27, this.slots.size(), true))
+			} else if (!this.moveItemStackTo(itemstack1, 0, 6, false)) {
+				if (index < 6 + 27) {
+					if (!this.moveItemStackTo(itemstack1, 6 + 27, this.slots.size(), true))
 						return ItemStack.EMPTY;
 				} else {
-					if (!this.moveItemStackTo(itemstack1, 8, 8 + 27, false))
+					if (!this.moveItemStackTo(itemstack1, 6, 6 + 27, false))
 						return ItemStack.EMPTY;
 				}
 				return ItemStack.EMPTY;

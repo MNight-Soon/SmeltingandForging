@@ -19,7 +19,7 @@ public class ForgerGUIScreen extends AbstractContainerScreen<ForgerGUIMenu> impl
 	private final int x, y, z;
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
-	private Button button_forge;
+	private Button button_start;
 	private static final ResourceLocation BACKGROUND = ResourceLocation.parse("smeltingandforging:textures/screens/forger_gui.png");
 
 	public ForgerGUIScreen(ForgerGUIMenu container, Inventory inventory, Component text) {
@@ -29,8 +29,8 @@ public class ForgerGUIScreen extends AbstractContainerScreen<ForgerGUIMenu> impl
 		this.y = container.y;
 		this.z = container.z;
 		this.entity = container.entity;
-		this.imageWidth = 176;
-		this.imageHeight = 166;
+		this.imageWidth = 180;
+		this.imageHeight = 180;
 	}
 
 	@Override
@@ -65,14 +65,13 @@ public class ForgerGUIScreen extends AbstractContainerScreen<ForgerGUIMenu> impl
 
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.drawString(this.font, Component.translatable("gui.smeltingandforging.forger_gui.label_forger"), 136, 7, -12829636, false);
 	}
 
 	@Override
 	public void init() {
 		super.init();
-		button_forge = Button.builder(Component.translatable("gui.smeltingandforging.forger_gui.button_forge"), e -> {
-		}).bounds(this.leftPos + 118, this.topPos + 59, 50, 20).build();
-		this.addRenderableWidget(button_forge);
+		button_start = Button.builder(Component.translatable("gui.smeltingandforging.forger_gui.button_start"), e -> {
+		}).bounds(this.leftPos + 121, this.topPos + 70, 50, 20).build();
+		this.addRenderableWidget(button_start);
 	}
 }

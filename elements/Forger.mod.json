@@ -106,7 +106,6 @@
       "fixedValue": 7.0
     },
     "hasInventory": true,
-    "guiBoundTo": "ForgerGUI",
     "openGUIOnRightClick": true,
     "inventorySize": 9,
     "inventoryStackSize": 99,

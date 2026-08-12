@@ -3,27 +3,29 @@
   "_type": "gui",
   "definition": {
     "type": 1,
-    "width": 176,
-    "height": 166,
+    "width": 180,
+    "height": 180,
     "inventoryOffsetX": 0,
-    "inventoryOffsetY": 0,
+    "inventoryOffsetY": 7,
     "renderBgLayer": true,
     "doesPauseGame": false,
     "components": [
       {
-        "type": "outputslot",
+        "type": "inputslot",
         "data": {
-          "color": {
-            "value": -26368,
-            "falpha": 0.0
+          "inputLimit": {
+            "value": ""
+          },
+          "disablePlacement": {
+            "fixedValue": true
           },
           "id": 0,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 271,
-          "y": 69,
+          "x": 208,
+          "y": 73,
           "locked": false
         }
       },
@@ -34,19 +36,15 @@
             "value": ""
           },
           "disablePlacement": {
-            "fixedValue": false
-          },
-          "color": {
-            "value": -13369345,
-            "falpha": 0.0
+            "fixedValue": true
           },
           "id": 1,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 136,
-          "y": 45,
+          "x": 234,
+          "y": 73,
           "locked": false
         }
       },
@@ -57,19 +55,15 @@
             "value": ""
           },
           "disablePlacement": {
-            "fixedValue": false
-          },
-          "color": {
-            "value": -6710785,
-            "falpha": 0.0
+            "fixedValue": true
           },
           "id": 2,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 136,
-          "y": 70,
+          "x": 208,
+          "y": 98,
           "locked": false
         }
       },
@@ -80,15 +74,15 @@
             "value": ""
           },
           "disablePlacement": {
-            "fixedValue": false
+            "fixedValue": true
           },
           "id": 3,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 188,
-          "y": 65,
+          "x": 182,
+          "y": 72,
           "locked": false
         }
       },
@@ -99,83 +93,28 @@
             "value": ""
           },
           "disablePlacement": {
-            "fixedValue": false
+            "fixedValue": true
           },
           "id": 4,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 206,
-          "y": 65,
-          "locked": false
-        }
-      },
-      {
-        "type": "inputslot",
-        "data": {
-          "inputLimit": {
-            "value": ""
-          },
-          "disablePlacement": {
-            "fixedValue": false
-          },
-          "id": 5,
-          "disablePickup": {
-            "fixedValue": false
-          },
-          "dropItemsWhenNotBound": true,
-          "x": 188,
-          "y": 83,
-          "locked": false
-        }
-      },
-      {
-        "type": "inputslot",
-        "data": {
-          "inputLimit": {
-            "value": ""
-          },
-          "disablePlacement": {
-            "fixedValue": false
-          },
-          "id": 6,
-          "disablePickup": {
-            "fixedValue": false
-          },
-          "dropItemsWhenNotBound": true,
-          "x": 206,
-          "y": 83,
+          "x": 208,
+          "y": 47,
           "locked": false
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_forge",
-          "text": "Forge",
+          "name": "button_start",
+          "text": "Start",
           "isUndecorated": false,
           "width": 50,
           "height": 20,
-          "x": 244,
-          "y": 96,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_forger",
-          "text": {
-            "fixedValue": "Forger"
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "hasShadow": false,
-          "x": 262,
-          "y": 44,
+          "x": 245,
+          "y": 100,
           "locked": false
         }
       },
@@ -186,15 +125,19 @@
             "value": ""
           },
           "disablePlacement": {
-            "fixedValue": false
+            "fixedValue": true
           },
-          "id": 7,
+          "color": {
+            "value": -13382401,
+            "falpha": 0.0
+          },
+          "id": 5,
           "disablePickup": {
             "fixedValue": false
           },
           "dropItemsWhenNotBound": true,
-          "x": 136,
-          "y": 97,
+          "x": 140,
+          "y": 41,
           "locked": false
         }
       }
