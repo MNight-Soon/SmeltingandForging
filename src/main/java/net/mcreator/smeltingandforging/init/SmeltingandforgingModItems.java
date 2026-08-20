@@ -11,9 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
 
-import net.mcreator.smeltingandforging.item.RodeblueprintItem;
-import net.mcreator.smeltingandforging.item.PickaxeheadblueprintItem;
-import net.mcreator.smeltingandforging.item.CoreblueprintItem;
+import net.mcreator.smeltingandforging.item.*;
 import net.mcreator.smeltingandforging.SmeltingandforgingMod;
 
 public class SmeltingandforgingModItems {
@@ -22,11 +20,19 @@ public class SmeltingandforgingModItems {
 	public static final DeferredItem<Item> COREBLUEPRINT;
 	public static final DeferredItem<Item> RODEBLUEPRINT;
 	public static final DeferredItem<Item> PICKAXEHEADBLUEPRINT;
+	public static final DeferredItem<Item> AXEHEADBLUEPRINT;
+	public static final DeferredItem<Item> SWORDHEADBLUEPRINT;
+	public static final DeferredItem<Item> HOEHEADBLUEPRINT;
+	public static final DeferredItem<Item> SHOVELHEADBLUEPRINT;
 	static {
 		FORGER = block(SmeltingandforgingModBlocks.FORGER);
 		COREBLUEPRINT = REGISTRY.register("coreblueprint", CoreblueprintItem::new);
 		RODEBLUEPRINT = REGISTRY.register("rodeblueprint", RodeblueprintItem::new);
 		PICKAXEHEADBLUEPRINT = REGISTRY.register("pickaxeheadblueprint", PickaxeheadblueprintItem::new);
+		AXEHEADBLUEPRINT = REGISTRY.register("axeheadblueprint", AxeheadblueprintItem::new);
+		SWORDHEADBLUEPRINT = REGISTRY.register("swordheadblueprint", SwordheadblueprintItem::new);
+		HOEHEADBLUEPRINT = REGISTRY.register("hoeheadblueprint", HoeheadblueprintItem::new);
+		SHOVELHEADBLUEPRINT = REGISTRY.register("shovelheadblueprint", ShovelheadblueprintItem::new);
 	}
 
 	// Start of user code block custom items

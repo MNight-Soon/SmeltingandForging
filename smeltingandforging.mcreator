@@ -8,12 +8,12 @@
       "registry_name": "forger",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
-          "src/main/resources/assets/smeltingandforging/models/item/forger.json",
-          "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
-          "src/main/resources/assets/smeltingandforging/blockstates/forger.json",
+          "src/main/resources/data/smeltingandforging/loot_table/blocks/forger.json",
           "src/main/resources/assets/smeltingandforging/models/block/forger.json",
-          "src/main/resources/data/smeltingandforging/loot_table/blocks/forger.json"
+          "src/main/java/net/mcreator/smeltingandforging/block/ForgerBlock.java",
+          "src/main/java/net/mcreator/smeltingandforging/block/entity/ForgerBlockEntity.java",
+          "src/main/resources/assets/smeltingandforging/models/item/forger.json",
+          "src/main/resources/assets/smeltingandforging/blockstates/forger.json"
         ]
       }
     },
@@ -28,7 +28,8 @@
           "src/main/resources/assets/smeltingandforging/models/item/coreblueprint.json",
           "src/main/java/net/mcreator/smeltingandforging/item/CoreblueprintItem.java"
         ]
-      }
+      },
+      "path": "~/Blueprints"
     },
     {
       "name": "Rodeblueprint",
@@ -41,7 +42,8 @@
           "src/main/java/net/mcreator/smeltingandforging/item/RodeblueprintItem.java",
           "src/main/resources/assets/smeltingandforging/models/item/rodeblueprint.json"
         ]
-      }
+      },
+      "path": "~/Blueprints"
     },
     {
       "name": "Pickaxeheadblueprint",
@@ -54,7 +56,8 @@
           "src/main/resources/assets/smeltingandforging/models/item/pickaxeheadblueprint.json",
           "src/main/java/net/mcreator/smeltingandforging/item/PickaxeheadblueprintItem.java"
         ]
-      }
+      },
+      "path": "~/Blueprints"
     },
     {
       "name": "SmithingTableGUI",
@@ -92,11 +95,67 @@
       "registry_name": "forger_gui_mini_game",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/smeltingandforging/world/inventory/ForgerGUIMiniGameMenu.java",
-          "src/main/java/net/mcreator/smeltingandforging/client/gui/ForgerGUIMiniGameScreen.java"
+          "src/main/java/net/mcreator/smeltingandforging/client/gui/ForgerGUIMiniGameScreen.java",
+          "src/main/java/net/mcreator/smeltingandforging/world/inventory/ForgerGUIMiniGameMenu.java"
         ]
       },
       "path": "~/GUI"
+    },
+    {
+      "name": "Axeheadblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "axeheadblueprint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/item/AxeheadblueprintItem.java",
+          "src/main/resources/assets/smeltingandforging/models/item/axeheadblueprint.json"
+        ]
+      },
+      "path": "~/Blueprints"
+    },
+    {
+      "name": "Swordheadblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "swordheadblueprint",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/smeltingandforging/models/item/swordheadblueprint.json",
+          "src/main/java/net/mcreator/smeltingandforging/item/SwordheadblueprintItem.java"
+        ]
+      },
+      "path": "~/Blueprints"
+    },
+    {
+      "name": "Hoeheadblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hoeheadblueprint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/smeltingandforging/item/HoeheadblueprintItem.java",
+          "src/main/resources/assets/smeltingandforging/models/item/hoeheadblueprint.json"
+        ]
+      },
+      "path": "~/Blueprints"
+    },
+    {
+      "name": "Shovelheadblueprint",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shovelheadblueprint",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/smeltingandforging/models/item/shovelheadblueprint.json",
+          "src/main/java/net/mcreator/smeltingandforging/item/ShovelheadblueprintItem.java"
+        ]
+      },
+      "path": "~/Blueprints"
     }
   ],
   "variable_elements": [],
@@ -111,19 +170,23 @@
       "item.smeltingandforging.rodeblueprint": "Headblueprint",
       "item.smeltingandforging.pickaxeheadblueprint": "Pickaxeheadblueprint",
       "gui.smeltingandforging.forger_gui.button_start": "Start",
-      "gui.smeltingandforging.forger_gui_mini_game.button_start": "Start"
+      "gui.smeltingandforging.forger_gui_mini_game.button_start": "Start",
+      "item.smeltingandforging.axeheadblueprint": "Axeheadblueprint",
+      "item.smeltingandforging.swordheadblueprint": "Swordheadblueprint",
+      "item.smeltingandforging.hoeheadblueprint": "Hoeheadblueprint",
+      "item.smeltingandforging.shovelheadblueprint": "Shovelheadblueprint"
     }
   },
   "metadata": {
     "files": [
-      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModScreens.java",
-      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModMenus.java",
       "src/main/java/net/mcreator/smeltingandforging/network/MenuStateUpdateMessage.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModMenus.java",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModScreens.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlocks.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModBlockEntities.java",
       "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModItems.java",
-      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModTabs.java",
       "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/java/net/mcreator/smeltingandforging/init/SmeltingandforgingModTabs.java",
       "src/main/java/net/mcreator/smeltingandforging/SmeltingandforgingMod.java",
       "src/main/resources/pack.mcmeta"
     ]
@@ -137,6 +200,10 @@
       },
       {
         "name": "GUI",
+        "children": []
+      },
+      {
+        "name": "Blueprints",
         "children": []
       }
     ]
@@ -159,5 +226,5 @@
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.smeltingandforging"
   },
-  "mcreatorVersion": 202600233218
+  "mcreatorVersion": 202600233518
 }
